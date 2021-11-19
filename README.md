@@ -1,21 +1,38 @@
 
 
 # Build image
-docker build -t parcelm -v .:/code .
+```sh
+docker build -t parcelm .
+```
 
-# Run the project
-docker run -d --user "$(id -u):$(id -g)" -v `pwd`:/code --name parcelm_container parcelm
+# Run go inside and run npm
 
 # Go inside
-docker exec -it parcelm_container /bin/sh
+## Linux
+```sh
+docker run --user "$(id -u):$(id -g)" -v `pwd`:/code -it parcelm /bin/sh
+```
+
+## Windows
+```sh
+docker run -v `pwd`:/code -it parcelm /bin/sh
+```
+
 
 # Install dependencies
+```sh
 npm install
+```
 
 # Build the project
+```sh
 npm run build
+```
 
+# Serve
+docker run -it --name my-apache-app -p 8080:80 -v "$PWD/dist":/usr/local/apache2/htdocs/ httpd:2.4
 
 # Buddy Works
+```sh
 docker exec -it parcelm_container /bin/sh -c "npm run build"
-
+```
