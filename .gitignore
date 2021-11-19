@@ -2,3 +2,9 @@
 elm-stuff
 # elm-repl generated files
 repl-temp-*
+
+.cache
+.parcel-cache
+dist
+node_modules
+yarn.lock
